@@ -1,9 +1,10 @@
-﻿@model Dictionary<int, string>
+﻿@model List<Character>
 
-@foreach (var item in Model)
+<h1>Rick and Morty API</h1>
+
+@foreach(var item in Model)
 {
-	<div>
-		<h2>Item ID: @item.Key</h2>
-		<p>Item Name: @item.Value</p>
-	</div>
+	Console.WriteLine(item.Name);
+	<p class="text-primary">@item.Name</p>
+	<p class="bg-primary">@item</p>
 }

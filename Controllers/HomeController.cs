@@ -1,20 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IntegrationRickAndMortyAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IntegrationRickAndMortyAPI.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ILogger<HomeController> _logger;
+        private readonly APIService _apiService;
+
+        public HomeController(ILogger<HomeController> logger, APIService apiService)
         {
-            Dictionary<int, string> characters = new Dictionary<int, string>
+            _logger = logger;
+            _apiService = apiService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            try
             {
-                { 1, "Rick Sanchez" },
-                { 2, "Morty Smith" },
-                { 3, "Summer Smith" },
-                { 4, "Beth Smith" },
-                { 5, "Jerry Smith" }
-            };
-            return View(characters);
+                var characters = await _apiService.GetAllCharactersAsync(2);
+                
+                return View(characters);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching characters");
+                return View();
+            }
         }
     }
 }

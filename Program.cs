@@ -2,6 +2,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpClient<IntegrationRickAndMortyAPI.Services.APIService>(client =>
+{
+    client.BaseAddress = new Uri("https://rickandmortyapi.com/api/");
+});
+
+builder.Services.AddScoped<IntegrationRickAndMortyAPI.Services.APIService>();
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
