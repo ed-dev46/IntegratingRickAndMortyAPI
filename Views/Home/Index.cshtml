@@ -1,10 +1,19 @@
 ﻿@model List<Character>
 
-<h1>Rick and Morty API</h1>
+<img src="~/css/img/logo.webp" alt="Rick and Morty Logo" style="width:30rem;display:flex;margin:0 auto;" />
+<h1 class="text-center">Rick and Morty API Integration</h1>
+<h2 class="text-center mb-5">Explicando o projeto e como utilizar</h2>
 
-@foreach(var item in Model)
-{
-	Console.WriteLine(item.Name);
-	<p class="text-primary">@item.Name</p>
-	<p class="bg-primary">@item</p>
-}
+<div class="container">
+	<div class="row gap-3">
+		@foreach (var item in Model)
+		{
+			<div class="col-sm text-center p-3 d-flex flex-column border border-3 border-success">
+				<img src="@item.Image" alt="Character Image" class="mb-3 border border-3 border-success"/>
+				<h3 class="fw-bold">@item.Name</h3>
+				<span>@item.Species</span>
+				<span>@item.Gender</span>
+			</div>
+		}
+	</div>
+</div>

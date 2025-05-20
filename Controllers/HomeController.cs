@@ -14,12 +14,11 @@ namespace IntegrationRickAndMortyAPI.Controllers
             _apiService = apiService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             try
             {
-                var characters = await _apiService.GetAllCharactersAsync(2);
-                
+                var characters = await _apiService.GetAllCharactersAsync(page);          
                 return View(characters);
             }
             catch (Exception ex)

@@ -27,4 +27,10 @@
         public string Name { get; set; }
         public string Url { get; set; }
     }
+
+    public class Episode
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
+    }
 }

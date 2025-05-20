@@ -13,7 +13,7 @@ namespace IntegrationRickAndMortyAPI.Services
             _httpClient.BaseAddress = new Uri(BaseUrl);
         }
 
-        public async Task<List<Character>> GetAllCharactersAsync(int page = 1)
+        public async Task<List<Character>> GetAllCharactersAsync(int page)
         {
             var response = await _httpClient.GetAsync($"character?page={page}");
             if (response.IsSuccessStatusCode)
