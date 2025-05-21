@@ -23,7 +23,7 @@ namespace IntegrationRickAndMortyAPI.Services
                 {
                     PropertyNameCaseInsensitive = true
                 });
-                return characterResponse?.Results ?? new List<Character>();
+                return characterResponse.Results ?? new List<Character>();
             }
             else
             {

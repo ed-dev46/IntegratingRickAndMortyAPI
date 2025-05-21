@@ -1,5 +1,6 @@
 ﻿using IntegrationRickAndMortyAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using IntegrationRickAndMortyAPI.Models;
 
 namespace IntegrationRickAndMortyAPI.Controllers
 {
@@ -16,15 +17,21 @@ namespace IntegrationRickAndMortyAPI.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
+            ViewBag.CurrentPage = page;
             try
             {
-                var characters = await _apiService.GetAllCharactersAsync(page);          
+                var characters = await _apiService.GetAllCharactersAsync(page);
+                if (!characters.Any())
+                {
+                    _logger.LogWarning("No characters found on page {Page}", page);
+                    return View(new List<Character>());
+                }
                 return View(characters);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error fetching characters");
-                return View();
+                return View(new List<Character>());
             }
         }
     }
